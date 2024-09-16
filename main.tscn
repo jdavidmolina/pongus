@@ -1,0 +1,129 @@
+[gd_scene load_steps=9 format=3 uid="uid://ceradcvb1tkk"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_k6hv7"]
+[ext_resource type="FontFile" uid="uid://cjcuhp8iw2ywr" path="res://Minecraft_font.ttf" id="1_pwadp"]
+[ext_resource type="Script" path="res://main.gd" id="1_tfo8a"]
+[ext_resource type="PackedScene" uid="uid://dy6nmgulsocov" path="res://Player/player.tscn" id="3_y21ib"]
+[ext_resource type="PackedScene" uid="uid://drilvvfqtf864" path="res://Ball/ball.tscn" id="5_1enlc"]
+
+[sub_resource type="Theme" id="Theme_o5a6r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ab05"]
+size = Vector2(1129, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pe5f2"]
+size = Vector2(20, 1032)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_tfo8a")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Player_score" type="Label" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -381.0
+offset_top = -9.0
+offset_right = -11.0
+offset_bottom = 104.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = SubResource("Theme_o5a6r")
+theme_override_fonts/font = ExtResource("1_pwadp")
+theme_override_font_sizes/font_size = 40
+text = "Player: 0000"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="CPU_score" type="Label" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1271.0
+offset_top = -9.0
+offset_right = -901.0
+offset_bottom = 104.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = SubResource("Theme_o5a6r")
+theme_override_fonts/font = ExtResource("1_pwadp")
+theme_override_font_sizes/font_size = 40
+text = "CPU: 0000"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall1" type="StaticBody2D" parent="Walls"]
+position = Vector2(640, 120)
+collision_layer = 3
+collision_mask = 3
+
+[node name="ColorRect2" type="ColorRect" parent="Walls/Wall1"]
+offset_left = -644.0
+offset_top = -132.0
+offset_right = 646.0
+offset_bottom = 798.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/Wall1"]
+offset_left = -565.0
+offset_top = -8.0
+offset_right = 565.0
+offset_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall1"]
+shape = SubResource("RectangleShape2D_1ab05")
+
+[node name="Wall2" type="StaticBody2D" parent="Walls"]
+position = Vector2(640, 770)
+collision_layer = 3
+collision_mask = 3
+
+[node name="ColorRect" type="ColorRect" parent="Walls/Wall2"]
+offset_left = -565.0
+offset_top = -8.0
+offset_right = 565.0
+offset_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
+shape = SubResource("RectangleShape2D_1ab05")
+
+[node name="Player" parent="." instance=ExtResource("3_y21ib")]
+
+[node name="CPU" type="StaticBody2D" parent="."]
+position = Vector2(175, 450)
+collision_layer = 3
+collision_mask = 2
+script = ExtResource("1_k6hv7")
+
+[node name="ColorRect" type="ColorRect" parent="CPU"]
+offset_left = -10.0
+offset_top = -66.0
+offset_right = 10.0
+offset_bottom = 66.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CPU"]
+rotation = -3.14159
+polygon = PackedVector2Array(10, -66, -4, -66, -6, -60, -11, -10, -11, 10, -6, 60, -4, 66, 10, 66)
+
+[node name="Score_left" type="Area2D" parent="."]
+position = Vector2(-16, 447)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Score_left"]
+shape = SubResource("RectangleShape2D_pe5f2")
+
+[node name="Score_right" type="Area2D" parent="."]
+position = Vector2(1300, 450)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Score_right"]
+shape = SubResource("RectangleShape2D_pe5f2")
+
+[node name="Ball" parent="." instance=ExtResource("5_1enlc")]
+
+[node name="Ball_timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
