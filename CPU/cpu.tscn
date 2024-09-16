@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://j4ym3faxh16s"]
+
+[ext_resource type="Script" path="res://CPU/cpu.gd" id="1_lcbgq"]
+
+[node name="CPU" type="StaticBody2D"]
+position = Vector2(175, 450)
+collision_layer = 3
+collision_mask = 2
+script = ExtResource("1_lcbgq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -66.0
+offset_right = 10.0
+offset_bottom = 66.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = -3.14159
+polygon = PackedVector2Array(10, -66, -4, -66, -6, -60, -11, -10, -11, 10, -6, 60, -4, 66, 10, 66)

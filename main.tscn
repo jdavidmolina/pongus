@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://ceradcvb1tkk"]
 
-[ext_resource type="Script" path="res://Player/player.gd" id="1_k6hv7"]
 [ext_resource type="FontFile" uid="uid://cjcuhp8iw2ywr" path="res://Minecraft_font.ttf" id="1_pwadp"]
 [ext_resource type="Script" path="res://main.gd" id="1_tfo8a"]
 [ext_resource type="PackedScene" uid="uid://dy6nmgulsocov" path="res://Player/player.tscn" id="3_y21ib"]
+[ext_resource type="PackedScene" uid="uid://j4ym3faxh16s" path="res://CPU/cpu.tscn" id="4_qhrjo"]
 [ext_resource type="PackedScene" uid="uid://drilvvfqtf864" path="res://Ball/ball.tscn" id="5_1enlc"]
 
 [sub_resource type="Theme" id="Theme_o5a6r"]
@@ -14,8 +14,13 @@ size = Vector2(1129, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pe5f2"]
 size = Vector2(20, 1032)
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("ball", "player", "cpu", "player_score_label", "cpu_score_label")]
 script = ExtResource("1_tfo8a")
+ball = NodePath("Ball")
+player = NodePath("Player")
+cpu = NodePath("CPU")
+player_score_label = NodePath("HUD/Player_score")
+cpu_score_label = NodePath("HUD/CPU_score")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -33,7 +38,7 @@ size_flags_vertical = 8
 theme = SubResource("Theme_o5a6r")
 theme_override_fonts/font = ExtResource("1_pwadp")
 theme_override_font_sizes/font_size = 40
-text = "Player: 0000"
+text = "Player: 0"
 horizontal_alignment = 1
 vertical_alignment = 2
 
@@ -51,9 +56,160 @@ size_flags_vertical = 8
 theme = SubResource("Theme_o5a6r")
 theme_override_fonts/font = ExtResource("1_pwadp")
 theme_override_font_sizes/font_size = 40
-text = "CPU: 0000"
+text = "CPU: 0"
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 1286.0
+offset_bottom = 918.0
+color = Color(0.133333, 0.133333, 0.203922, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 148.0
+offset_right = 646.0
+offset_bottom = 168.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect2" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 148.0
+offset_right = 646.0
+offset_bottom = 168.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect3" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 188.0
+offset_right = 646.0
+offset_bottom = 208.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect4" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 228.0
+offset_right = 646.0
+offset_bottom = 248.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect5" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 268.0
+offset_right = 646.0
+offset_bottom = 288.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect6" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 308.0
+offset_right = 646.0
+offset_bottom = 328.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect7" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 348.0
+offset_right = 646.0
+offset_bottom = 368.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect8" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 388.0
+offset_right = 646.0
+offset_bottom = 408.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect9" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 428.0
+offset_right = 646.0
+offset_bottom = 448.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect10" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 468.0
+offset_right = 646.0
+offset_bottom = 488.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect11" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 468.0
+offset_right = 646.0
+offset_bottom = 488.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect12" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 508.0
+offset_right = 646.0
+offset_bottom = 528.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect13" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 548.0
+offset_right = 646.0
+offset_bottom = 568.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect14" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 588.0
+offset_right = 646.0
+offset_bottom = 608.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect15" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 628.0
+offset_right = 646.0
+offset_bottom = 648.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect16" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 668.0
+offset_right = 646.0
+offset_bottom = 688.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect17" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 708.0
+offset_right = 646.0
+offset_bottom = 728.0
+pivot_offset = Vector2(2.5, 0)
+
+[node name="ColorRect18" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 748.0
+offset_right = 646.0
+offset_bottom = 768.0
+pivot_offset = Vector2(2.5, 0)
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -61,13 +217,6 @@ vertical_alignment = 2
 position = Vector2(640, 120)
 collision_layer = 3
 collision_mask = 3
-
-[node name="ColorRect2" type="ColorRect" parent="Walls/Wall1"]
-offset_left = -644.0
-offset_top = -132.0
-offset_right = 646.0
-offset_bottom = 798.0
-color = Color(0, 0, 0, 1)
 
 [node name="ColorRect" type="ColorRect" parent="Walls/Wall1"]
 offset_left = -565.0
@@ -94,36 +243,27 @@ shape = SubResource("RectangleShape2D_1ab05")
 
 [node name="Player" parent="." instance=ExtResource("3_y21ib")]
 
-[node name="CPU" type="StaticBody2D" parent="."]
-position = Vector2(175, 450)
-collision_layer = 3
-collision_mask = 2
-script = ExtResource("1_k6hv7")
+[node name="CPU" parent="." node_paths=PackedStringArray("ball") instance=ExtResource("4_qhrjo")]
+ball = NodePath("../Ball")
 
-[node name="ColorRect" type="ColorRect" parent="CPU"]
-offset_left = -10.0
-offset_top = -66.0
-offset_right = 10.0
-offset_bottom = 66.0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CPU"]
-rotation = -3.14159
-polygon = PackedVector2Array(10, -66, -4, -66, -6, -60, -11, -10, -11, 10, -6, 60, -4, 66, 10, 66)
-
-[node name="Score_left" type="Area2D" parent="."]
+[node name="Area_left" type="Area2D" parent="."]
 position = Vector2(-16, 447)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Score_left"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area_left"]
 shape = SubResource("RectangleShape2D_pe5f2")
 
-[node name="Score_right" type="Area2D" parent="."]
+[node name="Area_right" type="Area2D" parent="."]
 position = Vector2(1300, 450)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Score_right"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area_right"]
 shape = SubResource("RectangleShape2D_pe5f2")
 
 [node name="Ball" parent="." instance=ExtResource("5_1enlc")]
+unique_name_in_owner = true
 
 [node name="Ball_timer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[connection signal="body_entered" from="Area_left" to="." method="_on_area_left_body_entered"]
+[connection signal="body_entered" from="Area_right" to="." method="_on_area_right_body_entered"]
