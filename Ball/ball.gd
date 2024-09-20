@@ -6,7 +6,6 @@ var speed = 500.0
 func _ready() -> void:
 	ball_start_direction()
 	
-	
 func _physics_process(delta: float) -> void:
 	
 	var collision_info = move_and_collide(velocity * delta)
@@ -14,7 +13,6 @@ func _physics_process(delta: float) -> void:
 	if collision_info: #if collision happens
 		velocity = velocity.bounce(collision_info.get_normal())
 		collision_sound.play()
-		
 
 func ball_start_direction():
 	# Random left or right
@@ -22,8 +20,8 @@ func ball_start_direction():
 		velocity.x = 1
 	else:
 		velocity.x = -1
-		
-	# Random y angle
+
 	velocity.y = randf_range(-1, 1)
-	
 	velocity *= speed
+	
+	
