@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ceradcvb1tkk"]
+[gd_scene load_steps=10 format=3 uid="uid://ceradcvb1tkk"]
 
 [ext_resource type="FontFile" uid="uid://cjcuhp8iw2ywr" path="res://Minecraft_font.ttf" id="1_pwadp"]
 [ext_resource type="Script" path="res://main.gd" id="1_tfo8a"]
 [ext_resource type="PackedScene" uid="uid://dy6nmgulsocov" path="res://Player/player.tscn" id="3_y21ib"]
 [ext_resource type="PackedScene" uid="uid://j4ym3faxh16s" path="res://CPU/cpu.tscn" id="4_qhrjo"]
 [ext_resource type="PackedScene" uid="uid://drilvvfqtf864" path="res://Ball/ball.tscn" id="5_1enlc"]
+[ext_resource type="AudioStream" uid="uid://cctrnv7k08sa5" path="res://Sound/4385__noisecollector__pongblipd5.wav" id="6_f8jx8"]
 
 [sub_resource type="Theme" id="Theme_o5a6r"]
 
@@ -242,8 +243,10 @@ offset_bottom = 8.0
 shape = SubResource("RectangleShape2D_1ab05")
 
 [node name="Player" parent="." instance=ExtResource("3_y21ib")]
+speed = 300.0
 
 [node name="CPU" parent="." node_paths=PackedStringArray("ball") instance=ExtResource("4_qhrjo")]
+speed = 300.0
 ball = NodePath("../Ball")
 
 [node name="Area_left" type="Area2D" parent="."]
@@ -258,10 +261,51 @@ position = Vector2(1300, 450)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_right"]
 shape = SubResource("RectangleShape2D_pe5f2")
 
-[node name="Ball" parent="." instance=ExtResource("5_1enlc")]
+[node name="Ball" parent="." node_paths=PackedStringArray("collision_sound") instance=ExtResource("5_1enlc")]
 unique_name_in_owner = true
+collision_sound = NodePath("../Pong_sound")
 
-[node name="Ball_timer" type="Timer" parent="."]
+[node name="Pong_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_f8jx8")
+
+[node name="Countdown" type="Node2D" parent="."]
+position = Vector2(643, 336)
+
+[node name="Label" type="Label" parent="Countdown"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -30.0
+offset_right = 23.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_pwadp")
+theme_override_font_sizes/font_size = 80
+text = "3"
+
+[node name="ColorRect" type="ColorRect" parent="Countdown"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -100.0
+offset_right = 202.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(1, 1, 1, 0.239216)
+
+[node name="Timer" type="Timer" parent="Countdown"]
+wait_time = 3.0
 one_shot = true
 autostart = true
 

@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var collision_sound: AudioStreamPlayer
 var speed = 500.0
 
 func _ready() -> void:
@@ -12,6 +13,7 @@ func _physics_process(delta: float) -> void:
 	
 	if collision_info: #if collision happens
 		velocity = velocity.bounce(collision_info.get_normal())
+		collision_sound.play()
 		
 
 func ball_start_direction():
@@ -22,6 +24,6 @@ func ball_start_direction():
 		velocity.x = -1
 		
 	# Random y angle
-	velocity.y = randf_range(-0.5, 0.5)
+	velocity.y = randf_range(-1, 1)
 	
 	velocity *= speed

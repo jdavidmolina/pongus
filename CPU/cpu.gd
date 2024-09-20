@@ -6,9 +6,9 @@ extends StaticBody2D
 
 func _physics_process(delta: float) -> void:
 	var velocity = Vector2.ZERO
-	if ball.position.y > position.y + 40:
+	if ball.position.y > position.y + 50:
 		velocity.y = 1
-	elif ball.position.y < position.y - 40:
+	elif ball.position.y < position.y - 50:
 		velocity.y = -1
 		
 	velocity *= speed
