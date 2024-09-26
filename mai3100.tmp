@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ceradcvb1tkk"]
+[gd_scene load_steps=13 format=3 uid="uid://ceradcvb1tkk"]
 
 [ext_resource type="FontFile" uid="uid://cjcuhp8iw2ywr" path="res://Minecraft_font.ttf" id="1_pwadp"]
 [ext_resource type="Script" path="res://main.gd" id="1_tfo8a"]
@@ -14,6 +14,67 @@ size = Vector2(1129, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pe5f2"]
 size = Vector2(20, 1032)
+
+[sub_resource type="Animation" id="Animation_vqh5h"]
+resource_name = "countdown"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUD/Reset_fade_background/Reset_timer:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["3", "2", "1", ""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HUD/Reset_fade_background:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_7khsk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUD/Reset_fade_background/Reset_timer:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["3"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HUD/Reset_fade_background:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pvbks"]
+_data = {
+"RESET": SubResource("Animation_7khsk"),
+"countdown": SubResource("Animation_vqh5h")
+}
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("ball", "player", "cpu", "player_score_label", "cpu_score_label")]
 script = ExtResource("1_tfo8a")
@@ -74,6 +135,7 @@ color = Color(0, 0, 0, 0.513726)
 
 [node name="Reset_timer" type="Label" parent="HUD/Reset_fade_background"]
 unique_name_in_owner = true
+modulate = Color(1, 0.364706, 0.376471, 1)
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -81,10 +143,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = -174.0
-offset_right = 29.0
-offset_bottom = -74.0
+offset_left = -25.0
+offset_top = -170.0
+offset_right = 31.0
+offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_pwadp")
@@ -298,10 +360,10 @@ collision_sound = NodePath("../Pong_sound")
 [node name="Pong_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_f8jx8")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
+[node name="Countdown_animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pvbks")
+}
 
 [connection signal="body_entered" from="Area_left" to="." method="_on_area_left_body_entered"]
 [connection signal="body_entered" from="Area_right" to="." method="_on_area_right_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="reset"]
