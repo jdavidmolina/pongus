@@ -17,12 +17,10 @@ var player_score: int = 0
 var cpu_score: int = 0
 
 func _ready() -> void:
-	pass
-	reset_fade_background.hide()
-	
+	timer.start()
+	reset()
 	
 func _process(delta: float) -> void:
-	
 	var time_left: int  = int(timer.time_left)
 	reset_timer_label.text = str(time_left + 1)
 
@@ -41,8 +39,8 @@ func _on_area_right_body_entered(body: Node2D) -> void:
 
 	
 func reset():
+	get_tree().paused = false
 	reset_fade_background.show()
-	
 	player.position.y = CENTER.y
 	ball.position = CENTER 
 	cpu.position.y = CENTER.y
@@ -51,5 +49,5 @@ func reset():
 	await timer.timeout
 	
 	reset_fade_background.hide()
-		
+
 	ball.ball_start_direction()

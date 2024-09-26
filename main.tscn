@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ceradcvb1tkk"]
+[gd_scene load_steps=13 format=3 uid="uid://ceradcvb1tkk"]
 
 [ext_resource type="FontFile" uid="uid://cjcuhp8iw2ywr" path="res://Minecraft_font.ttf" id="1_pwadp"]
 [ext_resource type="Script" path="res://main.gd" id="1_tfo8a"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://j4ym3faxh16s" path="res://CPU/cpu.tscn" id="4_qhrjo"]
 [ext_resource type="PackedScene" uid="uid://drilvvfqtf864" path="res://Ball/ball.tscn" id="5_1enlc"]
 [ext_resource type="AudioStream" uid="uid://cctrnv7k08sa5" path="res://Sound/4385__noisecollector__pongblipd5.wav" id="6_f8jx8"]
+[ext_resource type="Shader" path="res://vhs.gdshader" id="8_ft67h"]
 
 [sub_resource type="Theme" id="Theme_o5a6r"]
 
@@ -15,6 +16,13 @@ size = Vector2(1129, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pe5f2"]
 size = Vector2(20, 1032)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ka2v1"]
+shader = ExtResource("8_ft67h")
+shader_parameter/wiggle = 0.2
+shader_parameter/wiggle_speed = 25.0
+shader_parameter/smear = 0.5
+shader_parameter/blur_samples = 15
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("ball", "player", "cpu", "player_score_label", "cpu_score_label")]
 script = ExtResource("1_tfo8a")
@@ -306,6 +314,16 @@ stream = ExtResource("6_f8jx8")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VHS_shader" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_ka2v1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="body_entered" from="Area_left" to="." method="_on_area_left_body_entered"]
 [connection signal="body_entered" from="Area_right" to="." method="_on_area_right_body_entered"]
