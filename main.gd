@@ -22,9 +22,7 @@ func _ready() -> void:
 	
 	
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("pause"):
-		get_tree().paused = true
-		print("pause")
+	
 	var time_left: int  = int(timer.time_left)
 	reset_timer_label.text = str(time_left + 1)
 
